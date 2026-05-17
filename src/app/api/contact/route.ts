@@ -114,7 +114,7 @@ export async function DELETE(request: Request) {
 
   if (id) {
     const responses = readResponses()
-    const filtered = responses.filter((r: { id: string }) => r.id !== id)
+    const filtered = responses.filter((r) => (r as { id: string }).id !== id)
     writeResponses(filtered)
     return NextResponse.json({ message: 'Deleted' })
   }

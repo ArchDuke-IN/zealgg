@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Code, Eye, Graph, TerminalWindow, ArrowRight, Star, TrendingUp, Clock, Shield, Target } from "@phosphor-icons/react";
+import { ArrowUpRight, Code, Eye, Graph, TerminalWindow, ArrowRight, Star, TrendUp, Clock, Shield, Target } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -186,7 +186,7 @@ export default function HomePageClient() {
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 text-white/30 text-xs uppercase tracking-[0.2em]">
           <span className="flex items-center gap-2"><Star className="text-emerald-400" weight="fill" size={14} /> 50+ Websites Delivered</span>
           <span className="hidden md:inline text-white/10">|</span>
-          <span className="flex items-center gap-2"><TrendingUp className="text-emerald-400" size={14} /> 300% Avg Traffic Growth</span>
+          <span className="flex items-center gap-2"><TrendUp className="text-emerald-400" size={14} /> 300% Avg Traffic Growth</span>
           <span className="hidden md:inline text-white/10">|</span>
           <span className="flex items-center gap-2"><Target className="text-emerald-400" size={14} /> 98 PageSpeed Score</span>
           <span className="hidden md:inline text-white/10">|</span>
