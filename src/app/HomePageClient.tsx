@@ -114,13 +114,12 @@ export default function HomePageClient() {
         toast.success("Message sent! We'll get back to you within 24 hours.");
         reset();
       } else {
-        const errorMsg = result.details
-          ? result.details.map((d: { message: string }) => d.message).join(', ')
-          : result.error || 'Failed to send. Please try again.';
-        toast.error(errorMsg);
+        toast.error(result.error || 'Failed to send. Please try again.');
+        console.error('Form error:', result);
       }
     } catch (err) {
-      toast.error(`Network error: ${err}`);
+      toast.error('Network error. Please try again.');
+      console.error('Network error:', err);
     }
   };
 
