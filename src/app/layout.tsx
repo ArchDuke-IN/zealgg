@@ -7,7 +7,7 @@ const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' })
 export const metadata: Metadata = {
   metadataBase: new URL('https://zealmedia.info'),
   title: {
-    default: 'ZEAL MEDIA | Web Development & SEO Agency',
+    default: 'ZEAL MEDIA — Web Development & SEO Agency',
     template: '%s | ZEAL MEDIA',
   },
   description: 'Premium web development agency specializing in Next.js websites, SEO optimization, and custom web applications.',
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://zealmedia.info',
     siteName: 'ZEAL MEDIA',
-    title: 'ZEAL MEDIA | Premium Web Development Agency',
-    description: 'Award-winning digital experiences, custom web applications, and dominant SEO strategies. We engineer websites that rank and convert.',
+    title: 'ZEAL MEDIA — Web Development & SEO Agency',
+    description: 'Premium web development agency specializing in Next.js websites, SEO optimization, and custom web applications.',
     images: [
       {
         url: '/og-image.jpg',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ZEAL MEDIA | Web Development Agency',
+    title: 'ZEAL MEDIA — Web Development & SEO Agency',
     description: 'Premium web development, SEO optimization, and custom web applications.',
     images: ['/og-image.jpg'],
   },
@@ -70,8 +70,9 @@ export const metadata: Metadata = {
     google: '',
   },
   alternates: {
+    canonical: 'https://zealmedia.info',
     languages: {
-      'en': 'https://zealmedia.info',
+      'en-US': 'https://zealmedia.info',
     },
   },
 }
@@ -89,7 +90,12 @@ export default function RootLayout({
         '@id': 'https://zealmedia.info/#organization',
         name: 'ZEAL MEDIA',
         url: 'https://zealmedia.info',
-        logo: 'https://zealmedia.info/logo.png',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://zealmedia.info/logo.png',
+          width: 512,
+          height: 512,
+        },
         description: 'Premium web development agency specializing in Next.js, React, SEO, and custom web applications.',
         sameAs: [
           'https://www.linkedin.com/company/zealmedia',
@@ -102,6 +108,7 @@ export default function RootLayout({
           '@type': 'ContactPoint',
           contactType: 'sales',
           url: 'https://zealmedia.info/contact',
+          availableLanguage: ['English'],
         },
       },
       {
@@ -112,6 +119,7 @@ export default function RootLayout({
         publisher: {
           '@id': 'https://zealmedia.info/#organization',
         },
+        inLanguage: 'en-US',
       },
       {
         '@type': 'ProfessionalService',
@@ -137,6 +145,36 @@ export default function RootLayout({
           'https://www.facebook.com/zealmedia',
           'https://www.youtube.com/@zealmedia',
         ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Web Development Services',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Next.js Web Development',
+                description: 'High-performance websites built with Next.js and React',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Technical SEO Optimization',
+                description: 'SEO built into every line of code',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'E-commerce Development',
+                description: 'Shopify, headless commerce, and custom online stores',
+              },
+            },
+          ],
+        },
       },
     ],
   }
@@ -144,6 +182,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <link rel="alternate" hrefLang="en" href="https://zealmedia.info" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
