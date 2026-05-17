@@ -108,19 +108,25 @@ export default function HomePageClient() {
         body: JSON.stringify(data),
       });
 
+      const result = await response.json();
+
       if (response.ok) {
         toast.success("Message sent! We'll get back to you within 24 hours.");
         reset();
       } else {
-        toast.error("Failed to send. Please try again.");
+        const errorMsg = result.details
+          ? result.details.map((d: { message: string }) => d.message).join(', ')
+          : result.error || 'Failed to send. Please try again.';
+        toast.error(errorMsg);
       }
-    } catch {
-      toast.error("Network error. Please check your connection.");
+    } catch (err) {
+      toast.error(`Network error: ${err}`);
     }
   };
 
   return (
     <main ref={containerRef} className="bg-[#050505] text-white min-h-[100dvh] font-sans selection:bg-white selection:text-black overflow-hidden relative">
+      <h1 className="sr-only">ZEAL MEDIA — Web Development Agency & Website Makers specializing in Next.js, SEO, and E-commerce</h1>
       <motion.div
         className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden"
         style={{ y: backgroundY }}

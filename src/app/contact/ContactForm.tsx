@@ -39,14 +39,19 @@ export default function ContactForm() {
         body: JSON.stringify(data),
       })
 
+      const result = await response.json()
+
       if (response.ok) {
         toast.success('Message sent successfully! We will get back to you within 24 hours.')
         reset()
       } else {
-        toast.error('Failed to send message. Please try again.')
+        const errorMsg = result.details
+          ? result.details.map((d: { message: string }) => d.message).join(', ')
+          : result.error || 'Failed to send message. Please try again.'
+        toast.error(errorMsg)
       }
-    } catch {
-      toast.error('Network error. Please check your connection and try again.')
+    } catch (err) {
+      toast.error(`Network error: ${err}`)
     } finally {
       setIsSubmitting(false)
     }

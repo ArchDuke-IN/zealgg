@@ -7,10 +7,10 @@ const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' })
 export const metadata: Metadata = {
   metadataBase: new URL('https://zealmedia.info'),
   title: {
-    default: 'ZEAL MEDIA | Web Development Agency & Website Makers — Next.js, SEO, E-commerce',
+    default: 'ZEAL MEDIA | Web Development & SEO Agency',
     template: '%s | ZEAL MEDIA',
   },
-  description: 'ZEAL MEDIA is a premium web development agency specializing in Next.js websites, technical SEO, e-commerce solutions, and custom web applications. We build high-performance websites that rank #1 on Google and convert visitors into customers.',
+  description: 'Premium web development agency specializing in Next.js websites, SEO optimization, and custom web applications.',
   keywords: [
     'web development agency',
     'website makers',
@@ -69,6 +69,11 @@ export const metadata: Metadata = {
   verification: {
     google: '',
   },
+  alternates: {
+    languages: {
+      'en': 'https://zealmedia.info',
+    },
+  },
 }
 
 export default function RootLayout({
@@ -84,12 +89,15 @@ export default function RootLayout({
         '@id': 'https://zealmedia.info/#organization',
         name: 'ZEAL MEDIA',
         url: 'https://zealmedia.info',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://zealmedia.info/logo.png',
-        },
+        logo: 'https://zealmedia.info/logo.png',
         description: 'Premium web development agency specializing in Next.js, React, SEO, and custom web applications.',
-        sameAs: [],
+        sameAs: [
+          'https://www.linkedin.com/company/zealmedia',
+          'https://twitter.com/zealmedia',
+          'https://www.instagram.com/zealmedia',
+          'https://www.facebook.com/zealmedia',
+          'https://www.youtube.com/@zealmedia',
+        ],
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'sales',
@@ -104,11 +112,6 @@ export default function RootLayout({
         publisher: {
           '@id': 'https://zealmedia.info/#organization',
         },
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://zealmedia.info/insights?q={search_term_string}',
-          'query-input': 'required name=search_term_string',
-        },
       },
       {
         '@type': 'ProfessionalService',
@@ -120,20 +123,20 @@ export default function RootLayout({
           '@type': 'PostalAddress',
           addressCountry: 'IN',
         },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 0,
-          longitude: 0,
-        },
         url: 'https://zealmedia.info',
-        telephone: '',
         openingHoursSpecification: {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
           opens: '09:00',
           closes: '18:00',
         },
-        sameAs: [],
+        sameAs: [
+          'https://www.linkedin.com/company/zealmedia',
+          'https://twitter.com/zealmedia',
+          'https://www.instagram.com/zealmedia',
+          'https://www.facebook.com/zealmedia',
+          'https://www.youtube.com/@zealmedia',
+        ],
       },
     ],
   }
