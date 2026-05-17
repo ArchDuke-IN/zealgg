@@ -6,3 +6,4 @@
 package-lock.json
 skills-lock.json
 tsconfig.tsbuildinfo
+.env.local

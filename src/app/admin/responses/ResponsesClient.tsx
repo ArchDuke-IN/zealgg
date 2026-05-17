@@ -30,6 +30,13 @@ export default function ResponsesClient() {
       .catch(() => setLoading(false))
   }, [])
 
+  const handleLogout = () => {
+    fetch('/api/admin/logout', { method: 'POST' })
+      .then(() => {
+        window.location.href = '/admin/login'
+      })
+  }
+
   const handleDelete = (id: string) => {
     if (!confirm('Delete this response?')) return
     fetch(`/api/contact?id=${id}`, { method: 'DELETE' })
@@ -56,9 +63,17 @@ export default function ResponsesClient() {
         <Link href="/" className="text-xl font-medium tracking-tighter text-white">
           ZEAL MEDIA <span className="opacity-40">ADMIN</span>
         </Link>
-        <Link href="/" className="text-sm font-medium hover:text-white transition-colors duration-300">
-          BACK TO SITE
-        </Link>
+        <div className="flex gap-4 items-center">
+          <button
+            onClick={handleLogout}
+            className="text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300"
+          >
+            LOGOUT
+          </button>
+          <Link href="/" className="text-sm font-medium hover:text-white transition-colors duration-300">
+            BACK TO SITE
+          </Link>
+        </div>
       </nav>
 
       <div className="pt-28 px-6 md:px-12 max-w-7xl mx-auto pb-20">
