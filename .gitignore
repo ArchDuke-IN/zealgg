@@ -1,0 +1,7 @@
+﻿node_modules/
+.next/
+.vscode/
+*.local
+.DS_Store
+package-lock.json
+skills-lock.json
