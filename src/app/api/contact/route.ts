@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import fs from 'fs'
+import path from 'path'
 
 const contactSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -13,12 +15,43 @@ const contactSchema = z.object({
 }).refine((data) => {
   const serviceType = data.protocolType || data.budget
   const details = data.specifics || data.message
-  if (!serviceType) return { error: 'Please select a service or budget' }
-  if (!details || details.length < 5) return { error: 'Please provide project details' }
-  return { success: true }
+  if (!serviceType) return false
+  if (!details || details.length < 5) return false
+  return true
 })
 
-const submissions: Array<Record<string, unknown>> = []
+const DATA_FILE = path.join(process.cwd(), 'data', 'form-responses.json')
+
+function ensureDataDir() {
+  const dir = path.dirname(DATA_FILE)
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
+}
+
+function readResponses(): Array<Record<string, unknown>> {
+  try {
+    ensureDataDir()
+    if (!fs.existsSync(DATA_FILE)) {
+      fs.writeFileSync(DATA_FILE, '[]', 'utf-8')
+      return []
+    }
+    const raw = fs.readFileSync(DATA_FILE, 'utf-8')
+    return JSON.parse(raw)
+  } catch (err) {
+    console.error('Error reading responses:', err)
+    return []
+  }
+}
+
+function writeResponses(data: Array<Record<string, unknown>>) {
+  try {
+    ensureDataDir()
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8')
+  } catch (err) {
+    console.error('Error writing responses:', err)
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -51,7 +84,10 @@ export async function POST(request: Request) {
       ip,
     }
 
-    submissions.unshift(submission)
+    const responses = readResponses()
+    responses.unshift(submission)
+    writeResponses(responses)
+
     console.log('Submission saved:', submission.id)
 
     return NextResponse.json(
@@ -68,7 +104,8 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  return NextResponse.json(submissions)
+  const responses = readResponses()
+  return NextResponse.json(responses)
 }
 
 export async function DELETE(request: Request) {
@@ -76,11 +113,12 @@ export async function DELETE(request: Request) {
   const id = url.searchParams.get('id')
 
   if (id) {
-    const idx = submissions.findIndex((r) => r.id === id)
-    if (idx !== -1) submissions.splice(idx, 1)
+    const responses = readResponses()
+    const filtered = responses.filter((r: { id: string }) => r.id !== id)
+    writeResponses(filtered)
     return NextResponse.json({ message: 'Deleted' })
   }
 
-  submissions.length = 0
+  writeResponses([])
   return NextResponse.json({ message: 'All cleared' })
 }
