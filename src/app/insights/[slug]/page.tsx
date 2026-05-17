@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getRelatedPosts, getAllSlugs } from '@/data/blog-posts'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 
 interface Props {
   params: { slug: string }
@@ -20,13 +22,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${post.title} | ZEAL MEDIA Insights`,
     description: post.description,
     alternates: {
-      canonical: `https://zealgg.com/insights/${post.slug}`,
+      canonical: `https://zealmedia.info/insights/${post.slug}`,
     },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
-      url: `https://zealgg.com/insights/${post.slug}`,
+      url: `https://zealmedia.info/insights/${post.slug}`,
       siteName: 'ZEAL MEDIA',
       images: [
         {
@@ -63,12 +65,12 @@ export default function BlogPost({ params }: Props) {
       name: 'ZEAL MEDIA',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://zealgg.com/logo.png',
+        url: 'https://zealmedia.info/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://zealgg.com/insights/${post.slug}`,
+      '@id': `https://zealmedia.info/insights/${post.slug}`,
     },
     keywords: post.tags.join(', '),
     articleSection: post.category,
@@ -110,6 +112,7 @@ export default function BlogPost({ params }: Props) {
       const processedText = trimmed
         .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-emerald-400 hover:text-emerald-300 underline">$1</a>')
 
       if (trimmed.startsWith('> ')) {
         return (
@@ -134,18 +137,9 @@ export default function BlogPost({ params }: Props) {
         />
       </head>
 
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-md bg-[#050505]/60 border-b border-white/5">
-        <Link href="/insights" className="flex items-center gap-3 text-sm font-medium hover:text-white transition-colors duration-300">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
-          BACK TO INSIGHTS
-        </Link>
-        <div className="flex gap-6 items-center">
-          <Link href="/services" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">SERVICES</Link>
-          <Link href="/contact" className="text-sm font-medium hover:text-white transition-colors duration-300">CONTACT</Link>
-        </div>
-      </nav>
+      <Navbar />
 
-      <article className="max-w-4xl mx-auto px-6 py-32 md:py-48">
+      <article className="max-w-4xl mx-auto px-6 pt-32 pb-20 md:pt-48">
         <header className="mb-20">
           <div className="flex items-center gap-4 mb-8 text-xs font-mono uppercase tracking-widest text-emerald-500">
             <span>{post.category}</span>
@@ -217,14 +211,18 @@ export default function BlogPost({ params }: Props) {
         </section>
       )}
 
-      <footer className="w-full border-t border-white/5 py-12 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.3em] font-medium text-white/40">
-        <div>ZEAL MEDIA / {new Date().getFullYear()}</div>
-        <div className="mt-4 md:mt-0 flex gap-8">
-          <Link href="/about" className="hover:text-white transition-colors duration-500">About</Link>
-          <Link href="/privacy" className="hover:text-white transition-colors duration-500">Privacy</Link>
-          <Link href="/terms" className="hover:text-white transition-colors duration-500">Terms</Link>
+      {/* CTA */}
+      <section className="px-6 py-24 md:px-12 max-w-4xl mx-auto">
+        <div className="p-10 rounded-[2rem] bg-gradient-to-r from-emerald-500/10 via-white/[0.02] to-cyan-500/10 border border-white/10 text-center">
+          <h3 className="text-2xl font-semibold tracking-tight text-white mb-4">Need help implementing these strategies?</h3>
+          <p className="text-slate-400 mb-8">Our team of web development and SEO experts can build your high-performance website.</p>
+          <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-slate-200 transition-colors">
+            Get a Free Consultation
+          </Link>
         </div>
-      </footer>
+      </section>
+
+      <Footer />
     </main>
   )
 }

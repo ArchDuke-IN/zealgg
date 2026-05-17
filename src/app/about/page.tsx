@@ -1,16 +1,18 @@
 import type { Metadata } from 'next'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'About ZEAL MEDIA | Award-Winning Web Development Agency & Website Makers',
   description: 'Learn about ZEAL MEDIA, a premier web development agency specializing in Next.js, React, SEO, and custom web applications. Meet our team of expert website makers and engineers.',
   alternates: {
-    canonical: 'https://zealgg.com/about',
+    canonical: 'https://zealmedia.info/about',
   },
   openGraph: {
     title: 'About ZEAL MEDIA | Web Development Agency',
     description: 'Award-winning digital experiences, custom web applications, and dominant SEO strategies. Meet the team behind ZEAL MEDIA.',
     type: 'website',
-    url: 'https://zealgg.com/about',
+    url: 'https://zealmedia.info/about',
     siteName: 'ZEAL MEDIA',
   },
 }
@@ -18,25 +20,10 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-[100dvh] w-full max-w-full overflow-x-hidden bg-[#050505] text-slate-200">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-md bg-[#050505]/60 border-b border-white/5">
-        <a href="/" className="text-xl font-medium tracking-tighter text-white">
-          ZEAL MEDIA <span className="opacity-40">ABOUT</span>
-        </a>
-        <div className="flex gap-8 items-center">
-          <a href="/services" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            SERVICES
-          </a>
-          <a href="/insights" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            INSIGHTS
-          </a>
-          <a href="/contact" className="text-sm font-medium hover:text-white transition-colors duration-300">
-            CONTACT
-          </a>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
-      <section className="relative px-6 pt-48 pb-32 md:px-12 md:pt-64 md:pb-48 max-w-7xl mx-auto">
+      <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-48 md:pb-32 max-w-7xl mx-auto">
         <div className="max-w-4xl">
           <h1 className="text-4xl md:text-7xl font-semibold tracking-tighter leading-[1.1] text-white">
             We Engineer{' '}
@@ -168,13 +155,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <footer className="w-full border-t border-white/5 py-12 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.3em] font-medium text-white/40">
-        <div>ZEAL MEDIA / {new Date().getFullYear()}</div>
-        <div className="mt-4 md:mt-0 flex gap-8">
-          <a href="/privacy" className="hover:text-white transition-colors duration-500">Privacy</a>
-          <a href="/terms" className="hover:text-white transition-colors duration-500">Terms</a>
-        </div>
-      </footer>
+      <Footer />
     </main>
   )
 }

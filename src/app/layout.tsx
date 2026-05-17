@@ -5,7 +5,7 @@ import './globals.css'
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://zealgg.com'),
+  metadataBase: new URL('https://zealmedia.info'),
   title: {
     default: 'ZEAL MEDIA | Web Development Agency & Website Makers — Next.js, SEO, E-commerce',
     template: '%s | ZEAL MEDIA',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://zealgg.com',
+    url: 'https://zealmedia.info',
     siteName: 'ZEAL MEDIA',
     title: 'ZEAL MEDIA | Premium Web Development Agency',
     description: 'Award-winning digital experiences, custom web applications, and dominant SEO strategies. We engineer websites that rank and convert.',
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: '', // Add your Google Search Console verification code
+    google: '',
   },
 }
 
@@ -81,40 +81,40 @@ export default function RootLayout({
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://zealgg.com/#organization',
+        '@id': 'https://zealmedia.info/#organization',
         name: 'ZEAL MEDIA',
-        url: 'https://zealgg.com',
+        url: 'https://zealmedia.info',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://zealgg.com/logo.png',
+          url: 'https://zealmedia.info/logo.png',
         },
         description: 'Premium web development agency specializing in Next.js, React, SEO, and custom web applications.',
         sameAs: [],
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'sales',
-          url: 'https://zealgg.com/contact',
+          url: 'https://zealmedia.info/contact',
         },
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://zealgg.com/#website',
-        url: 'https://zealgg.com',
+        '@id': 'https://zealmedia.info/#website',
+        url: 'https://zealmedia.info',
         name: 'ZEAL MEDIA',
         publisher: {
-          '@id': 'https://zealgg.com/#organization',
+          '@id': 'https://zealmedia.info/#organization',
         },
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://zealgg.com/insights?q={search_term_string}',
+          target: 'https://zealmedia.info/insights?q={search_term_string}',
           'query-input': 'required name=search_term_string',
         },
       },
       {
         '@type': 'ProfessionalService',
-        '@id': 'https://zealgg.com/#service',
+        '@id': 'https://zealmedia.info/#service',
         name: 'ZEAL MEDIA',
-        image: 'https://zealgg.com/og-image.jpg',
+        image: 'https://zealmedia.info/og-image.jpg',
         priceRange: '$$$',
         address: {
           '@type': 'PostalAddress',
@@ -125,7 +125,7 @@ export default function RootLayout({
           latitude: 0,
           longitude: 0,
         },
-        url: 'https://zealgg.com',
+        url: 'https://zealmedia.info',
         telephone: '',
         openingHoursSpecification: {
           '@type': 'OpeningHoursSpecification',

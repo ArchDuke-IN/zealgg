@@ -2,18 +2,20 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { blogPosts } from '@/data/blog-posts'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Insights & Blog | Web Development, SEO & Design Articles — ZEAL MEDIA',
   description: 'Expert insights on web development, Next.js SEO optimization, website design trends, and e-commerce strategies from the ZEAL MEDIA team. Stay ahead with our technical guides.',
   alternates: {
-    canonical: 'https://zealgg.com/insights',
+    canonical: 'https://zealmedia.info/insights',
   },
   openGraph: {
     title: 'Insights & Blog | ZEAL MEDIA',
     description: 'Engineering deep-dives, architectural post-mortems, and strategy protocols for modern web development.',
     type: 'website',
-    url: 'https://zealgg.com/insights',
+    url: 'https://zealmedia.info/insights',
     siteName: 'ZEAL MEDIA',
   },
 }
@@ -21,24 +23,9 @@ export const metadata: Metadata = {
 export default function InsightsPage() {
   return (
     <main className="min-h-[100dvh] w-full max-w-full overflow-x-hidden bg-[#050505] text-slate-200">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-md bg-[#050505]/60 border-b border-white/5">
-        <Link href="/" className="text-xl font-medium tracking-tighter text-white">
-          ZEAL MEDIA <span className="opacity-40">INSIGHTS</span>
-        </Link>
-        <div className="flex gap-8 items-center">
-          <Link href="/services" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            SERVICES
-          </Link>
-          <Link href="/about" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            ABOUT
-          </Link>
-          <Link href="/contact" className="text-sm font-medium hover:text-white transition-colors duration-300">
-            CONTACT
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
-      <section className="px-6 pt-48 pb-20 md:px-12 md:pt-64 md:pb-32 max-w-7xl mx-auto">
+      <section className="px-6 pt-36 pb-20 md:px-12 md:pt-48 md:pb-32 max-w-7xl mx-auto">
         <div className="max-w-4xl">
           <h1 className="text-4xl md:text-7xl font-semibold tracking-tighter leading-none text-white">
             Signal Intelligence.
@@ -91,14 +78,20 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <footer className="w-full border-t border-white/5 py-12 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.3em] font-medium text-white/40 mt-20">
-        <div>ZEAL MEDIA / {new Date().getFullYear()}</div>
-        <div className="mt-4 md:mt-0 flex gap-8">
-          <Link href="/about" className="hover:text-white transition-colors duration-500">About</Link>
-          <Link href="/privacy" className="hover:text-white transition-colors duration-500">Privacy</Link>
-          <Link href="/terms" className="hover:text-white transition-colors duration-500">Terms</Link>
+      {/* Internal linking CTA */}
+      <section className="px-6 py-24 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+        <div className="p-10 rounded-[2rem] bg-white/[0.02] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <h3 className="text-2xl font-semibold tracking-tight text-white mb-2">Need a web development agency?</h3>
+            <p className="text-slate-400">We don&apos;t just write about best practices — we implement them for every client.</p>
+          </div>
+          <Link href="/contact" className="shrink-0 px-6 py-3 rounded-full bg-white text-black font-medium hover:bg-slate-200 transition-colors">
+            Get a Free Quote
+          </Link>
         </div>
-      </footer>
+      </section>
+
+      <Footer />
     </main>
   )
 }

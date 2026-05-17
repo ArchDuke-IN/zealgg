@@ -1,16 +1,18 @@
 import type { Metadata } from 'next'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Web Development Services | Next.js, React, SEO & E-commerce — ZEAL MEDIA',
   description: 'ZEAL MEDIA offers expert web development services including Next.js development, React applications, technical SEO optimization, e-commerce solutions, and custom CRM platforms. Get a quote today.',
   alternates: {
-    canonical: 'https://zealgg.com/services',
+    canonical: 'https://zealmedia.info/services',
   },
   openGraph: {
     title: 'Web Development Services | ZEAL MEDIA',
     description: 'Expert Next.js development, SEO optimization, e-commerce solutions, and custom web applications. Engineering scalable web architectures.',
     type: 'website',
-    url: 'https://zealgg.com/services',
+    url: 'https://zealmedia.info/services',
     siteName: 'ZEAL MEDIA',
   },
 }
@@ -18,24 +20,9 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main className="min-h-[100dvh] w-full max-w-full overflow-x-hidden bg-[#050505] text-slate-200">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-md bg-[#050505]/60 border-b border-white/5">
-        <a href="/" className="text-xl font-medium tracking-tighter text-white">
-          ZEAL MEDIA <span className="opacity-40">SERVICES</span>
-        </a>
-        <div className="flex gap-8 items-center">
-          <a href="/about" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            ABOUT
-          </a>
-          <a href="/insights" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            INSIGHTS
-          </a>
-          <a href="/contact" className="text-sm font-medium hover:text-white transition-colors duration-300">
-            START A PROJECT
-          </a>
-        </div>
-      </nav>
+      <Navbar />
 
-      <section className="relative px-6 pt-48 pb-32 md:px-12 md:pt-64 md:pb-48 max-w-7xl mx-auto">
+      <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-48 md:pb-32 max-w-7xl mx-auto">
         <div className="absolute inset-0 max-w-full overflow-hidden pointer-events-none -z-10">
           <div
             className="absolute -top-[20%] -left-[10%] w-[60vw] h-[60vw] rounded-full bg-blue-900/40 blur-[120px]"
@@ -106,7 +93,7 @@ export default function ServicesPage() {
             </div>
             <h3 className="text-xl text-white mb-3">E-commerce Development</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Shopify Plus, headless commerce, custom checkout flows, and conversion optimization. We build online stores that sell.
+              Shopify Plus, headless commerce, custom checkout flows, and conversion optimization. We build online stores that sell. Read our <a href="/insights/ecommerce-website-development-guide" className="text-emerald-400 hover:text-emerald-300 underline">complete e-commerce guide</a>.
             </p>
           </div>
 
@@ -117,7 +104,7 @@ export default function ServicesPage() {
             </div>
             <h3 className="text-xl text-white mb-3">Web Application Development</h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Custom SaaS platforms, dashboards, and internal tools built with React, Node.js, and modern cloud infrastructure.
+              Custom SaaS platforms, dashboards, and internal tools built with React, Node.js, and modern cloud infrastructure. Learn about our <a href="/insights/custom-web-application-development" className="text-emerald-400 hover:text-emerald-300 underline">development process</a>.
             </p>
           </div>
         </div>
@@ -160,14 +147,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <footer className="w-full border-t border-white/5 py-12 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.3em] font-medium text-white/40">
-        <div>ZEAL MEDIA / {new Date().getFullYear()}</div>
-        <div className="mt-4 md:mt-0 flex gap-8">
-          <a href="/about" className="hover:text-white transition-colors duration-500">About</a>
-          <a href="/privacy" className="hover:text-white transition-colors duration-500">Privacy</a>
-          <a href="/terms" className="hover:text-white transition-colors duration-500">Terms</a>
-        </div>
-      </footer>
+      <Footer />
     </main>
   )
 }

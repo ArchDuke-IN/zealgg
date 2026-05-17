@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
 import ContactForm from './ContactForm'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
   title: 'Contact ZEAL MEDIA | Web Development Agency — Start Your Project',
   description: 'Get in touch with ZEAL MEDIA, a leading web development agency. Request a quote for Next.js development, SEO optimization, e-commerce solutions, or custom web applications.',
   alternates: {
-    canonical: 'https://zealgg.com/contact',
+    canonical: 'https://zealmedia.info/contact',
   },
   openGraph: {
     title: 'Contact ZEAL MEDIA | Start Your Web Development Project',
     description: 'Ready to build a high-performance website? Contact our team of expert developers and SEO specialists.',
     type: 'website',
-    url: 'https://zealgg.com/contact',
+    url: 'https://zealmedia.info/contact',
     siteName: 'ZEAL MEDIA',
   },
 }
@@ -19,24 +21,9 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main className="min-h-[100dvh] w-full max-w-full overflow-x-hidden bg-[#050505] text-slate-200">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-md bg-[#050505]/60 border-b border-white/5">
-        <a href="/" className="text-xl font-medium tracking-tighter text-white">
-          ZEAL MEDIA <span className="opacity-40">CONTACT</span>
-        </a>
-        <div className="flex gap-8 items-center">
-          <a href="/services" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            SERVICES
-          </a>
-          <a href="/insights" className="text-sm font-medium hover:text-white transition-colors duration-300 hidden md:block">
-            INSIGHTS
-          </a>
-          <a href="/" className="text-sm font-medium hover:text-white transition-colors duration-300">
-            HOME
-          </a>
-        </div>
-      </nav>
+      <Navbar />
 
-      <section className="relative px-6 pt-48 pb-32 md:px-12 md:pt-64 md:pb-48 max-w-7xl mx-auto">
+      <section className="relative px-6 pt-36 pb-20 md:px-12 md:pt-48 md:pb-24 max-w-7xl mx-auto">
         <div className="max-w-3xl">
           <h1 className="text-4xl md:text-7xl font-semibold tracking-tighter leading-[1.1] text-white">
             Let&apos;s Build Something{' '}
@@ -77,10 +64,6 @@ export default function ContactPage() {
                   <span className="text-emerald-400 mt-1">&#9679;</span>
                   <span><strong className="text-white">Custom Web Applications</strong> — CRMs, dashboards, and SaaS platforms</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-emerald-400 mt-1">&#9679;</span>
-                  <span><strong className="text-white">UI/UX Design</strong> — Premium interfaces with cinematic animations</span>
-                </li>
               </ul>
             </div>
 
@@ -89,7 +72,7 @@ export default function ContactPage() {
               <ol className="space-y-4 text-slate-400">
                 <li className="flex items-start gap-3">
                   <span className="text-emerald-400 font-bold">01</span>
-                  <span><strong className="text-white">Discovery</strong> — We learn about your business, goals, and target audience</span>
+                  <span><strong className="text-white">Discovery</strong> — We learn about your business and goals</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-emerald-400 font-bold">02</span>
@@ -105,21 +88,25 @@ export default function ContactPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-emerald-400 font-bold">05</span>
-                  <span><strong className="text-white">Launch & Support</strong> — Deployment and ongoing optimization</span>
+                  <span><strong className="text-white">Launch & Support</strong> — Deployment and optimization</span>
                 </li>
               </ol>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10">
+              <h3 className="text-lg font-medium text-white mb-3">Why Choose ZEAL MEDIA?</h3>
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                We&apos;re not just website makers — we&apos;re your digital growth partner. Every project we deliver is engineered for search rankings, user engagement, and business growth.
+              </p>
+              <a href="/about" className="text-emerald-400 text-sm hover:text-emerald-300 transition-colors inline-flex items-center gap-1">
+                Learn more about us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <footer className="w-full border-t border-white/5 py-12 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.3em] font-medium text-white/40">
-        <div>ZEAL MEDIA / {new Date().getFullYear()}</div>
-        <div className="mt-4 md:mt-0 flex gap-8">
-          <a href="/privacy" className="hover:text-white transition-colors duration-500">Privacy</a>
-          <a href="/terms" className="hover:text-white transition-colors duration-500">Terms</a>
-        </div>
-      </footer>
+      <Footer />
     </main>
   )
 }

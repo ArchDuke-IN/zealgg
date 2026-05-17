@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://zealgg.com/sitemap.xml',
+    sitemap: 'https://zealmedia.info/sitemap.xml',
   }
 }
