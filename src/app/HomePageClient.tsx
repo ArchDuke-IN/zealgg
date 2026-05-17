@@ -539,6 +539,13 @@ export default function HomePageClient() {
       </section>
 
       <Footer />
+
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden p-4 bg-[#050505]/90 backdrop-blur-xl border-t border-white/10">
+        <Link href="/contact" className="flex items-center justify-center gap-3 w-full py-4 rounded-full bg-white text-black font-semibold text-sm uppercase tracking-[0.2em]">
+          Get Free Quote <ArrowRight weight="bold" className="w-4 h-4" />
+        </Link>
+      </div>
     </main>
   );
 }
