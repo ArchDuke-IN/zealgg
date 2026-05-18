@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import fs from 'fs'
-import path from 'path'
+import { Resend } from 'resend'
 
 const contactSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -20,36 +19,41 @@ const contactSchema = z.object({
   return true
 })
 
-const DATA_FILE = path.join(process.cwd(), 'data', 'form-responses.json')
+const submissions: Array<Record<string, unknown>> = []
 
-function ensureDataDir() {
-  const dir = path.dirname(DATA_FILE)
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true })
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
+
+async function sendEmailNotification(submission: Record<string, unknown>) {
+  if (!resend) {
+    console.log('Resend API key not set. Email notification skipped.')
+    console.log('Add RESEND_API_KEY to your .env.local or Vercel environment variables.')
+    return
   }
-}
 
-function readResponses(): Array<Record<string, unknown>> {
   try {
-    ensureDataDir()
-    if (!fs.existsSync(DATA_FILE)) {
-      fs.writeFileSync(DATA_FILE, '[]', 'utf-8')
-      return []
-    }
-    const raw = fs.readFileSync(DATA_FILE, 'utf-8')
-    return JSON.parse(raw)
-  } catch (err) {
-    console.error('Error reading responses:', err)
-    return []
-  }
-}
-
-function writeResponses(data: Array<Record<string, unknown>>) {
-  try {
-    ensureDataDir()
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8')
-  } catch (err) {
-    console.error('Error writing responses:', err)
+    await resend.emails.send({
+      from: 'ZEAL MEDIA <onboarding@resend.dev>',
+      to: [process.env.NOTIFICATION_EMAIL || 'your-email@example.com'], // Replace with your email
+      subject: `New Contact Form Submission from ${submission.firstName} ${submission.lastName}`,
+      html: `
+        <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #34d399;">New Lead — ZEAL MEDIA</h2>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr><td style="padding: 8px 0; color: #666;">Name</td><td style="padding: 8px 0; font-weight: bold;">${submission.firstName} ${submission.lastName}</td></tr>
+            <tr><td style="padding: 8px 0; color: #666;">Email</td><td style="padding: 8px 0;"><a href="mailto:${submission.email}">${submission.email}</a></td></tr>
+            ${submission.company ? `<tr><td style="padding: 8px 0; color: #666;">Company</td><td style="padding: 8px 0;">${submission.company}</td></tr>` : ''}
+            <tr><td style="padding: 8px 0; color: #666;">Service</td><td style="padding: 8px 0;">${submission.budget}</td></tr>
+            <tr><td style="padding: 8px 0; color: #666;">Message</td><td style="padding: 8px 0;">${submission.message}</td></tr>
+            <tr><td style="padding: 8px 0; color: #666;">Submitted</td><td style="padding: 8px 0;">${new Date(submission.submittedAt as string).toLocaleString()}</td></tr>
+          </table>
+          <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;" />
+          <p style="color: #999; font-size: 12px;">View all submissions at <a href="https://zealmedia.info/admin/responses">zealmedia.info/admin/responses</a></p>
+        </div>
+      `,
+    })
+    console.log('Email notification sent successfully')
+  } catch (error) {
+    console.error('Failed to send email notification:', error)
   }
 }
 
@@ -84,9 +88,9 @@ export async function POST(request: Request) {
       ip,
     }
 
-    const responses = readResponses()
-    responses.unshift(submission)
-    writeResponses(responses)
+    submissions.unshift(submission)
+
+    sendEmailNotification(submission)
 
     console.log('Submission saved:', submission.id)
 
@@ -104,8 +108,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  const responses = readResponses()
-  return NextResponse.json(responses)
+  return NextResponse.json(submissions)
 }
 
 export async function DELETE(request: Request) {
@@ -113,12 +116,11 @@ export async function DELETE(request: Request) {
   const id = url.searchParams.get('id')
 
   if (id) {
-    const responses = readResponses()
-    const filtered = responses.filter((r) => (r as { id: string }).id !== id)
-    writeResponses(filtered)
+    const idx = submissions.findIndex((r) => (r as { id: string }).id !== id)
+    if (idx !== -1) submissions.splice(idx, 1)
     return NextResponse.json({ message: 'Deleted' })
   }
 
-  writeResponses([])
+  submissions.length = 0
   return NextResponse.json({ message: 'All cleared' })
 }

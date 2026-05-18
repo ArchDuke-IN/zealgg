@@ -77,6 +77,19 @@ export default function ResponsesClient() {
       </nav>
 
       <div className="pt-28 px-6 md:px-12 max-w-7xl mx-auto pb-20">
+        <div className="mb-8 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+          <h3 className="text-emerald-400 font-medium mb-2">Setup Email Notifications</h3>
+          <p className="text-slate-400 text-sm">
+            Form submissions are now emailed to you instantly. To enable:
+          </p>
+          <ol className="text-slate-400 text-sm mt-2 space-y-1 list-decimal list-inside">
+            <li>Get a free API key at <a href="https://resend.com" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline">resend.com</a></li>
+            <li>Add <code className="bg-white/5 px-1 rounded">RESEND_API_KEY</code> and <code className="bg-white/5 px-1 rounded">NOTIFICATION_EMAIL</code> to your Vercel environment variables</li>
+            <li>Redeploy your site</li>
+          </ol>
+          <p className="text-slate-500 text-xs mt-3">Until then, submissions are stored in memory (visible below during this session only).</p>
+        </div>
+
         <div className="flex items-center justify-between mb-12">
           <div>
             <h1 className="text-4xl font-semibold tracking-tighter text-white">Form Responses</h1>
